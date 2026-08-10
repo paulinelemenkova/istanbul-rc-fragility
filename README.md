@@ -19,9 +19,7 @@ from a grid-evaluated posterior.
 
 ## Citation
 
-> Lemenkova, P., Zülfikar, A. C. (2026). Explainable machine-learning
-> surrogates for the simulated seismic damage and fragility of reinforced
-> concrete frame archetypes representative of the Istanbul building stock.
+> Lemenkova, P., Zülfikar, A. C. (2026). Explainable machine-learning prediction of simulated seismic damage and fragility of reinforced concrete frames in Istanbul.
 > *Discover Concrete and Cement*.
 
 Software archive: [10.5281/zenodo.21871975](https://doi.org/10.5281/zenodo.21871975)
