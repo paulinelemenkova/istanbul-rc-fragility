@@ -31,3 +31,15 @@ keywords:
   - XGBoost
   - SHAP
   - Istanbul
+preferred-citation:
+  type: article
+  title: "Explainable machine-learning prediction of simulated seismic damage and fragility of reinforced concrete frames in Istanbul"
+  authors:
+    - given-names: Polina
+      family-names: Lemenkova
+      orcid: "https://orcid.org/0000-0002-5759-1089"
+    - given-names: Abdullah Can
+      family-names: Zülfikar
+      orcid: "https://orcid.org/0000-0001-6610-3334"
+  journal: "Discover Concrete and Cement"
+  year: 2026
