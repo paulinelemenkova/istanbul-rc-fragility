@@ -25,17 +25,14 @@ numpy==2.4.6
 scipy==1.17.1
 pandas==2.2.3
 
-# --- machine learning and Bayesian inference -------------------------------
+# --- machine learning ------------------------------------------------------
+# SHAP attribution uses exact TreeSHAP through XGBoost's pred_contribs=True,
+# so the separate `shap` package is not required.
 scikit-learn==1.6.0
 xgboost==3.2.0
-shap==0.51.0
-pymc==5.28.5
-arviz==0.23.4
 
 # --- geospatial ------------------------------------------------------------
 rasterio==1.4.4
-geopandas==1.0.1
-shapely==2.1.2
 
 # --- plotting --------------------------------------------------------------
 matplotlib==3.9.3

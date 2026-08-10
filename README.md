@@ -10,9 +10,12 @@ code-conforming and deficient detailing, is analysed in OpenSeesPy under 30
 recorded North Anatolian Fault ground motions scaled to six intensity levels
 (10,800 analyses). A gradient-boosted surrogate trained with record-wise
 cross-validation reproduces maximum inter-storey drift and EMS-98 damage state
-at a fraction of the simulation cost; SHAP attribution, cross-checked against
-pushover capacity analysis, identifies the design variables that govern
-resistance; lognormal fragility parameters are estimated with PyMC.
+at a fraction of the simulation cost. SHAP attribution, cross-checked against a
+pushover capacity analysis in which deficient detailing halves the yield
+strength and the supply-to-demand ductility margin, identifies the design
+variables that govern resistance. Lognormal fragility parameters are estimated
+by maximum likelihood on the binomial stripe counts, with credible intervals
+from a grid-evaluated posterior.
 
 ## Citation
 
@@ -75,19 +78,28 @@ can be run without repeating the 5.25 h campaign.
 `run_campaign.py` is resumable: kill it and rerun, and completed
 `(fid, rid, level)` triples are skipped. It needs `data/records/` populated first.
 
-**2 — Surrogate, interpretation and fragility**
+**2 — Surrogate, capacity and fragility**
 
-    python scripts/oof_one.py xgb record    # -> results/derived/oof_xgb_record.npz
-    python scripts/measure_cost.py          # computational-cost table
-    python scripts/pushover.py             # capacity analysis -> results/derived/pushover_capacity.csv
-    python scripts/make_fig07.py            # ML performance  (reads results/derived/)
-    python scripts/make_fig08.py            # SHAP attribution -> results/derived/shap_importance.csv
-    python scripts/make_fig09.py            # fragility (PyMC) -> results/derived/fragility_fits.csv
+    python scripts/oof_one.py xgb record   # -> results/derived/oof_xgb_record.npz
+    python scripts/measure_cost.py         # computational-cost table
+    python scripts/pushover.py             # capacity analysis
+                                           #    -> results/derived/pushover_capacity.csv
+    python scripts/make_fig07.py           # ML performance  (reads results/derived/)
+    python scripts/make_fig08.py           # SHAP attribution
+                                           #    -> results/derived/shap_importance.csv
+    python scripts/make_fig09.py           # fragility fits
+                                           #    -> results/derived/fragility_fits.csv
 
 `oof_one.py <model> <partition>` computes out-of-fold predictions for one
 candidate model under one grouping; `model` is `linear | rf | xgb | mlp` and
 `partition` is `record | frame`. Run all eight combinations to reproduce the
 model-comparison table; `xgb record` is the configuration adopted in the paper.
+
+`pushover.py` runs a displacement-controlled monotonic push on each archetype,
+reduces it to an equivalent SDOF system through the first-mode participation
+factor, and reports the behaviour factor `q` and displacement ductility `mu`.
+The elastic demand for `q` is the EC8 Type 1 spectrum; change it with
+`--ag` and `--soil`.
 
 **3 — Site data and figures**
 
@@ -109,7 +121,7 @@ All figures are written to `figures/` as vector PDF plus 600 dpi PNG.
 
 ## Repository layout
 
-    scripts/            simulation, ML, fragility and figure code
+    scripts/            simulation, ML, capacity, fragility and figure code
       mpl_style.py      shared Matplotlib house style (imported by the figure scripts)
       check_overlap.py  label-collision audit used by figures 6-9
       paired_07.cpt     ColorBrewer Paired-7 palette for figure 3
@@ -117,8 +129,9 @@ All figures are written to `figures/` as vector PDF plus 600 dpi PNG.
     data/external/      third-party inputs (GEBCO, GEM, catalogue extract)
     data/records/       ground-motion waveforms (not tracked; fetched by the user)
     results/            simulation_database.csv
-    results/derived/    out-of-fold predictions, SHAP importances, fragility fits
-    figures/            generated figures (not tracked)
+    results/derived/    out-of-fold predictions, SHAP importances, fragility fits,
+                        pushover capacity (q and mu per archetype)
+    figures/            generated figures
     docs/               column dictionaries
 
 ## Data
@@ -129,6 +142,16 @@ combination (10,800 rows). Column dictionary: `docs/columns.md`.
 `data/frame_population.csv` holds the 60 archetypes with their eigenvalue-derived
 fundamental periods. Reproducible from `frame_population.py` with the fixed seed
 recorded in that file.
+
+## Implementation notes
+
+SHAP attribution uses exact TreeSHAP through XGBoost's `pred_contribs=True`,
+so no separate `shap` dependency is required.
+
+Fragility parameters are fitted by maximum likelihood to the binomial exceedance
+counts at the six intensity stripes; the 95 % credible intervals come from a
+posterior over (theta, beta) evaluated on a grid under flat priors, which is
+exact for a two-parameter model and needs no sampler.
 
 ## Licence
 
