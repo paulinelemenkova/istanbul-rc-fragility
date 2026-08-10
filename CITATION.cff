@@ -1,0 +1,33 @@
+cff-version: 1.2.0
+title: istanbul-rc-fragility
+message: >-
+  If you use this software or dataset, please cite both the software
+  (this record) and the associated journal article.
+type: software
+authors:
+  - given-names: Polina
+    family-names: Lemenkova
+    email: lemenkova@itu.edu.tr
+    affiliation: >-
+      Disaster and Emergency Management Department, Institute of Earthquake
+      Engineering and Disaster Management, Istanbul Technical University
+    orcid: "https://orcid.org/0000-0002-5759-1089"
+  - given-names: Abdullah Can
+    family-names: Zülfikar
+    email: aczulfikar@itu.edu.tr
+    affiliation: >-
+      Disaster and Emergency Management Department, Institute of Earthquake
+      Engineering and Disaster Management, Istanbul Technical University
+    orcid: "https://orcid.org/0000-0001-6610-3334"
+repository-code: "https://github.com/polinalemenkova/istanbul-rc-fragility"
+license: MIT
+version: 1.0.0
+date-released: "2026-08-10"
+keywords:
+  - reinforced concrete
+  - explainable machine learning
+  - seismic fragility
+  - OpenSeesPy
+  - XGBoost
+  - SHAP
+  - Istanbul

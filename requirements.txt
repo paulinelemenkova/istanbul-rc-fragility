@@ -1,0 +1,42 @@
+# istanbul-rc-fragility - Python dependencies
+#
+# Python 3.12.3
+#
+# Install with:
+#     python3 -m venv .venv && source .venv/bin/activate
+#     pip install -r requirements.txt
+#
+# Two dependencies are NOT installed by pip:
+#
+#   GMT 6         needed by GMT-01-Marmara-seis.sh and GMT-02-Istanbul-vs30.sh
+#                 https://www.generic-mapping-tools.org
+#
+#   Nimbus Sans   required by the figure scripts, which refuse to export in
+#                 Matplotlib's DejaVu Sans fallback
+#                     macOS:   brew install --cask font-urw-base35
+#                     Debian:  sudo apt-get install fonts-urw-base35
+
+# --- simulation ------------------------------------------------------------
+openseespy==3.8.0.0
+openseespymac==3.8.0.0 ; sys_platform == "darwin"
+
+# --- numerics and data -----------------------------------------------------
+numpy==2.4.6
+scipy==1.17.1
+pandas==2.2.3
+
+# --- machine learning and Bayesian inference -------------------------------
+scikit-learn==1.6.0
+xgboost==3.2.0
+shap==0.51.0
+pymc==5.28.5
+arviz==0.23.4
+
+# --- geospatial ------------------------------------------------------------
+rasterio==1.4.4
+geopandas==1.0.1
+shapely==2.1.2
+
+# --- plotting --------------------------------------------------------------
+matplotlib==3.9.3
+pillow==9.4.0
