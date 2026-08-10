@@ -19,13 +19,13 @@ resistance; lognormal fragility parameters are estimated with PyMC.
 > Lemenkova, P., Zülfikar, A. C. (2026). Explainable machine-learning
 > surrogates for the simulated seismic damage and fragility of reinforced
 > concrete frame archetypes representative of the Istanbul building stock.
-> *Discover Concrete and Cement*. [DOI to follow]
+> *Discover Concrete and Cement*.
 
-Software archive: [Zenodo DOI to follow]
+Software archive: [10.5281/zenodo.21871975](https://doi.org/10.5281/zenodo.21871975)
 
 ## Installation
 
-    git clone https://github.com/paulinelemenkova/istanbul-rc-fragility.git
+    git clone https://github.com/polinalemenkova/istanbul-rc-fragility.git
     cd istanbul-rc-fragility
     python3 -m venv .venv && source .venv/bin/activate
     pip install -r requirements.txt
