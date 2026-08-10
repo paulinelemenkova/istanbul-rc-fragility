@@ -25,7 +25,7 @@ Software archive: [Zenodo DOI to follow]
 
 ## Installation
 
-    git clone https://github.com/polinalemenkova/istanbul-rc-fragility.git
+    git clone https://github.com/paulinelemenkova/istanbul-rc-fragility.git
     cd istanbul-rc-fragility
     python3 -m venv .venv && source .venv/bin/activate
     pip install -r requirements.txt
