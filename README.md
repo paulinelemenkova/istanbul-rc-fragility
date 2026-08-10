@@ -79,6 +79,7 @@ can be run without repeating the 5.25 h campaign.
 
     python scripts/oof_one.py xgb record    # -> results/derived/oof_xgb_record.npz
     python scripts/measure_cost.py          # computational-cost table
+    python scripts/pushover.py             # capacity analysis -> results/derived/pushover_capacity.csv
     python scripts/make_fig07.py            # ML performance  (reads results/derived/)
     python scripts/make_fig08.py            # SHAP attribution -> results/derived/shap_importance.csv
     python scripts/make_fig09.py            # fragility (PyMC) -> results/derived/fragility_fits.csv
